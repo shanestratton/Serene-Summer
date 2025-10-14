@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Sailing Adventures - A Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Custom Font Imports - Changed to Lato for a clean, modern look */
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap'); /* Still imported, but Lato is primary for content */
+
+        /* --- Animation Keyframes --- */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- Global Styles for Sleek Look --- */
+        body {
+            font-family: 'Lato', sans-serif; /* Primary font for body */
+            background-color: #ffffff; /* Light background - WHITE */
+            color: #263238; /* Dark text color */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.6; /* Increased line-height for readability */
+        }
+
+        /* Headings Font - Applied for a consistent, modern feel */
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif; /* Montserrat for headings */
+            text-transform: uppercase; /* All headings uppercase */
+            letter-spacing: 0.05em; /* Increased letter spacing for headings */
+        }
+
+        .container {
+            max-width: 1280px; /* Wider container */
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 2rem; /* More horizontal padding */
+            padding-right: 2rem; /* More horizontal padding */
+            /* Flex properties for the container itself, within the header */
+            display: flex;
+            justify-content: space-between; /* Space between children */
+            align-items: center; /* Vertically align children */
+        }
+
+        /* --- Header Section --- */
+        .header {
+            background-color: #ffffff; /* Changed to WHITE */
+            color: #263238; /* text-gray-800 for general header text */
+            box-shadow: none;
+            padding: 1.5rem 0; /* Removed horizontal padding here as it's on .container */
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Subtle dark border */
+            /* Removed flex properties from here; now on .container directly */
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1.25rem;
+        }
+
+        .social-icons a {
+            transition: opacity 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            opacity: 0.6;
+        }
+
+        .social-icons i {
+            color: #333333; /* Dark grey for icons on white background */
+            font-size: 1.25rem;
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 2.5rem;
+            font-size: 0.95rem;
+        }
+
+        .main-nav a {
+            color: #1a1a1a; /* Dark text for nav links on white background */
+            font-weight: 400;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            letter-spacing: 0.03em;
+        }
+
+        .main-nav a:hover {
+            color: #666666; /* Darker grey on hover */
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            position: relative;
+            height: 0; /* Set height to 0 for aspect ratio padding */
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio (9/16 = 0.5625) */
+            background-color: #000; /* Fallback background for video */
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: none;
+            margin-bottom: 4rem;
+        }
+
+        .hero-video-background { /* Container for the YouTube iframe */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Allow clicks to pass through to content */
+            overflow: hidden; /* Hide any overflow */
+        }
+
+        .hero-video-background iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vw; /* Use viewport width as base */
+            height: 56.25vw; /* Maintain 16:9 aspect ratio relative to width */
+            min-height: 100%; /* Ensure it always covers height of parent */
+            min-width: 100%; /* Ensure it always covers width of parent */
+            transform: translate(-50%, -50%); /* Center the video */
+            object-fit: cover; /* Ensures video covers the area without black bars */
+            background-color: #000; /* Keep black background for video */
+            border: none; /* Remove default iframe border */
+        }
+        /* Adjust for taller screens (e.g., vertical monitors, mobile portrait) */
+        @media (min-aspect-ratio: 16/9) {
+            .hero-video-background iframe {
+                height: 100vh; /* Use viewport height */
+                width: 177.77vh; /* Maintain 16:9 aspect ratio relative to height (16/9 * 100) */
+            }
+        }
+
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: #000000;
+            opacity: 0; /* Changed opacity to 0 for bright video */
+            border-radius: 0;
+        }
+
+        .hero-content {
+            position: absolute; /* Changed from relative */
+            inset: 0; /* Changed from relative */
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* REMOVED H1 STYLING AS H1 ELEMENT IS REMOVED FROM HTML */
+
+        .hero-subscribe-button { /* Styling for the new subscribe button */
+            display: inline-flex;
+            align-items: center;
+            padding: 0.9rem 2.5rem;
+            background-color: #ff0000; /* YouTube Red */
+            color: #ffffff;
+            font-size: 1.25rem;
+            border: 1px solid #ff0000; /* Red border */
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+            margin-top: 0; /* Reset margin-top to position at the top if needed */
+            margin-bottom: auto; /* Push it to the top within flex container */
+            align-self: flex-end; /* Align to the end (top right) */
+            margin-right: 2rem; /* Add some space from the right edge */
+            margin-top: 2rem; /* Add some space from the top edge */
+            text-decoration: none; /* Remove underline */
+            font-weight: 700; /* Make it bold */
+            z-index: 20; /* Ensure it's above other hero content */
+        }
+
+        .hero-subscribe-button:hover {
+            background-color: #cc0000; /* Darker red on hover */
+            color: #ffffff;
+            transform: scale(1.05); /* Slightly more pronounced hover effect */
+        }
+
+        .hero-subscribe-button i {
+            margin-right: 0.5rem;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5); /* Shadow for better contrast */
+        }
+
+        /* --- Support Our Journey Section --- */
+        .support-section {
+            padding-top: 4rem; 
+            padding-bottom: 4rem; 
+            margin-bottom: 4rem;
+            background-color: #f8f8f8; /* Light background for contrast */
+            color: #1a1a1a; 
+            box-shadow: none; 
+            width: 100%; 
+            margin-left: 0; 
+            margin-right: 0; 
+            box-sizing: border-box; 
+        }
+
+        .support-card {
+            /* KEEPING DARK THEME for high contrast CTA */
+            background: radial-gradient(circle, #2a2a2a 0%, #1a1a1a 100%);
+            border-radius: 0;
+            box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.4), 0 8px 10px -8px rgba(0, 0, 0, 0.2);
+            padding: 5rem 4rem;
+            text-align: center;
+            /* Applying .container properties to the card itself to constrain the content */
+            max-width: 1280px; 
+            margin: 0 auto;
+            /* Adding container padding to the card content itself */
+            padding-left: 2rem;
+            padding-right: 2rem; 
+            box-sizing: border-box; 
+            
+            position: relative;
+            z-index: 1;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 0.8s ease-in-out;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .support-card:hover {
+            transform: scale(1.01);
+            box-shadow: 0 15px 25px -8px rgba(0, 0, 0, 0.6), 0 10px 15px -8px rgba(0, 0, 0, 0.4);
+        }
+        
+        .support-card h2.support-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            margin-top: 0;
+            margin-bottom: 3rem;
+            color: #ffffff;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            display: block;
+            line-height: 1.2;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .support-card p {
+            font-size: 1.35rem;
+            color: #e0e0e0;
+            margin-bottom: 3rem;
+            line-height: 1.9;
+            letter-spacing: 0.01em;
+        }
+
+        .support-buttons {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        @media (min-width: 640px) {
+            .support-buttons {
+                flex-direction: row;
+            }
+        }
+        
+        .support-buttons a {
+            padding: 1.5rem 4rem; /* Increased padding */
+            color: #ffffff;
+            font-size: 1.25rem; /* Slightly reduced base font size to make icon stand out more */
+            font-weight: 700;
+            border: none; /* Let background color define shape */
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            border-radius: 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* NEW: Significantly increase icon size */
+        .support-buttons a i {
+            font-size: 2rem; /* Large, prominent icon */
+            margin-right: 1rem; /* Increased spacing */
+            vertical-align: middle;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5); /* Ensure contrast */
+        }
+        
+        /* PayPal Button - Solid and distinct */
+        .support-buttons .paypal-button {
+            background-color: #007bff; /* Primary Blue */
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4); 
+        }
+
+        .support-buttons .paypal-button:hover {
+            background-color: #0056b3; /* Darker blue on hover for clear feedback */
+            color: #ffffff;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.6);
+        }
+
+        /* Stripe Button - Solid and distinct */
+        .support-buttons .stripe-button {
+            background-color: #673ab7; /* Secondary Purple */
+            box-shadow: 0 4px 15px rgba(103, 58, 183, 0.4);
+        }
+
+        .support-buttons .stripe-button:hover {
+            background-color: #512da8; /* Darker purple on hover */
+            color: #ffffff;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(103, 58, 183, 0.6);
+        }
+
+        .support-card .thank-you-note {
+            font-size: 1rem;
+            color: #888888;
+            margin-top: 2.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        /* --- Eat, Travel, Relax Boxes --- */
+        .etr-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            text-align: center;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .etr-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .etr-box {
+            position: relative;
+            border-radius: 0;
+            box-shadow: none;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            min-height: 250px; /* Adjusted height to prevent stretching */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .etr-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .etr-box img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .etr-box:hover img {
+            transform: scale(1.05);
+        }
+        /* ... (etr-box content styles unchanged) ... */
+
+        /* --- Reusable Info Section Styling (Light Card) --- */
+        .info-section {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+            margin-bottom: 4rem;
+            background-color: #f8f8f8;
+            text-align: center;
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+            box-sizing: border-box;
+        }
+
+        .info-card {
+            /* Standard BRIGHT card theme */
+            background-color: #ffffff;
+            color: #263238; 
+            border-radius: 0;
+            box-shadow: 0 8px 15px -5px rgba(0, 0, 0, 0.2); 
+            padding: 5rem 4rem;
+            text-align: center;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+            border: 1px solid #e0e0e0; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.8s ease-in-out;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: scale(1.01);
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .info-card .info-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            margin-top: 0;
+            margin-bottom: 3rem;
+            color: #263238; /* Dark heading color */
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid rgba(38, 50, 56, 0.2);
+            display: block;
+            line-height: 1.2;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        /* ... (rest of light card content styles unchanged) ... */
+
+        /* --- ETR Section (Uses Dark Card Style, different from standard info-card) --- */
+        .etr-grid-card {
+            background: radial-gradient(circle, #2a2a2a 0%, #1a1a1a 100%);
+            border-radius: 0;
+            box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.4), 0 8px 10px -8px rgba(0, 0, 0, 0.2);
+            padding: 5rem 4rem;
+            text-align: center;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 0.8s ease-in-out;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .etr-grid-card:hover {
+             transform: scale(1.01);
+            box-shadow: 0 15px 25px -8px rgba(0, 0, 0, 0.6), 0 10px 15px -8px rgba(0, 0, 0, 0.4);
+        }
+        .etr-grid-card .info-heading {
+            color: #ffffff; /* White heading for dark card */
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- Passage Stats Styling (REVAMPED with Images) --- */
+        .passage-stats {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            width: 100%;
+        }
+        @media (min-width: 768px) {
+            .passage-stats {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+        }
+        .passage-stats .stat-box {
+            flex-basis: 30%;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0;
+            min-height: 180px; /* Consistent height for visual balance */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .passage-stats .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Base class for image background boxes */
+        .stat-box-image {
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Individual Image URLs (UPDATED) */
+        .stat-box.departure {
+            background-image: url('https://i.imgur.com/xQCPowK.png'); /* NEW IMAGE */
+        }
+        .stat-box.miles {
+            background-image: url('https://i.imgur.com/KjWOtOE.png'); /* YOUR NEW IMAGE */
+        }
+        .stat-box.countries {
+            background-image: url('https://i.imgur.com/yCbNQoM.png'); /* UPDATED to the latest image */
+        }
+
+        /* Overlay for Readability - OPACITY DECREASED TO 35% */
+        .stat-box-content {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.35); /* Dark overlay - DECREASED OPACITY */
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #ffffff; /* White text on dark overlay */
+            transition: background-color 0.3s ease;
+        }
+        .stat-box:hover .stat-box-content {
+            background-color: rgba(0, 0, 0, 0.5); /* Slightly darker overlay on hover */
+        }
+
+        /* Content Styling */
+        .passage-stats .stat-box h4 {
+            color: #007bff; /* Primary Blue for visual pop */
+            font-size: 2.2rem; /* Larger font size */
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+        }
+        .passage-stats .stat-box p {
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 400;
+            margin: 0;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        /* PredictWind Tracker Styling */
+        .predictwind-tracker-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 75%; /* 4:3 Aspect Ratio (adjust as needed for the tracker layout) */
+            height: 0;
+            overflow: hidden;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            max-width: 1280px; /* UPDATED: Constrain max width for large screens */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .predictwind-tracker-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Adjust padding-bottom for mobile responsiveness if 4:3 is too tall */
+        @media (max-width: 768px) {
+            .predictwind-tracker-container {
+                padding-bottom: 100%; /* Make it square or adjust to 1:1 aspect ratio */
+            }
+        }
+
+        /* --- Bureaucracy Grid (Icon Size Increased) FIX --- */
+        .bureaucracy-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            margin-top: 2rem;
+            text-align: left;
+            /* Ensure the grid itself is centered within the info-card */
+            width: 100%; 
+            margin-left: auto; 
+            margin-right: auto;
+        }
+        
+        @media (min-width: 768px) {
+            .bureaucracy-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .grid-item {
+            padding: 2rem;
+            border: 1px solid #cccccc;
+            background-color: #fafafa;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            text-align: center; /* Keep text centered inside grid item */
+        }
+        
+        .grid-item i {
+            font-size: 3.5rem; /* INCREASED ICON SIZE */
+            color: #007bff; /* Primary blue for key actions */
+            margin-bottom: 1rem;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+        }
+        /* ... (rest of grid item styles unchanged) ... */
+        
+
+        /* --- Join Our Journey / Newsletter Section (Force Dark Style for CTA) --- */
+        #join-us {
+            /* Re-applying dark style override for the CTA section */
+            background: radial-gradient(circle, #2a2a2a 0%, #1a1a1a 100%);
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #join-us .info-heading {
+            color: #ffffff;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        #join-us p {
+            font-size: 1.125rem;
+            color: #e0e0e0;
+            margin-bottom: 2rem;
+        }
+        
+        /* --- Contact Us Section (Force Dark Style & Refinements) --- */
+        #contact-us {
+            /* Re-applying dark style override for the Contact section */
+            background: radial-gradient(circle, #2a2a2a 0%, #1a1a1a 100%);
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        #contact-us .info-heading {
+            color: #ffffff;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        #contact-us p {
+            font-size: 1.125rem;
+            color: #e0e0e0;
+            margin-bottom: 2rem;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        /* FIX: Override the centered .info-card content for the form to align properly */
+        #contact-us .info-content {
+            text-align: center; 
+        }
+
+        .contact-form-group {
+            /* Center the form block */
+            margin-left: auto; 
+            margin-right: auto;
+            text-align: left; /* Keep labels and inputs left-aligned */
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .contact-form-group > div {
+            /* Center the label/input pair within the form group */
+            margin-left: auto; 
+            margin-right: auto; 
+            max-width: 400px; /* Constrain the input width for a cleaner look */
+        }
+        
+        /* Ensure inputs take up full width of the centered div */
+        .contact-form-group input,
+        .contact-form-group textarea {
+            width: 100%;
+            box-sizing: border-box;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        /* Center the button as it is also a block element now */
+        .contact-form-group button {
+            display: block;
+            margin: 1rem auto 0 auto; /* Center the button */
+            max-width: 400px;
+        }
+
+        .contact-form-group input:focus,
+        .contact-form-group textarea:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.7); 
+        }
+        
+        .contact-form-group button:hover {
+            transform: scale(1.03); 
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.7);
+        }
+        
+        .contact-disclaimer {
+            font-size: 0.75rem;
+            color: #aaaaaa; /* Lighter grey for better contrast on dark background */
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        /* --- Footer Section (Artistic Touch) --- */
+        .footer {
+            background-color: #000000;
+            color: #cccccc;
+            padding: 2.5rem 0; 
+            margin-top: 4rem;
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Tidy up the grid alignment on desktop */
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr 400px; /* Give copyright 1fr, constrain about section for cleaner look */
+            }
+            .about-skippers-section {
+                align-items: flex-end;
+            }
+        }
+        
+        .about-skippers-section {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Set a defined size/padding for content area */
+            padding: 1.5rem; 
+            background-color: #1a1a1a; 
+            border-radius: 4px;
+        }
+        
+        .about-skippers-section img {
+            width: 80px; /* Smaller, circular avatar */
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid #007bff; /* Blue ring for accent */
+        }
+        
+        .about-skippers-section p {
+            /* Fluff text styling */
+            color: #e0e0e0;
+            line-height: 1.6;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="header">
+        <div class="container"> 
+            <div class="social-icons">
+                <a href="https://facebook.com" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://pinterest.com" target="_blank">
+                    <i class="fab fa-pinterest"></i>
+                </a>
+                <a href="https://x.com" target="_blank">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/@SVSereneSummer" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">About Me</a></li> 
+                    <li><a href="yacht_guide.html">Yacht Guide</a></li>
+                    <li><a href="#contact-us">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-video-background">
+            <iframe src="https://www.youtube.com/embed/EpdP84cANFg?autoplay=1&mute=1&loop=1&playlist=EpdP84cANFg&controls=0&modestbranding=1&rel=0&playsinline=1"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+            </iframe>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <a href="https://www.youtube.com/@SVSereneSummer" target="_blank" class="hero-subscribe-button">
+                <i class="fab fa-youtube"></i> SUBSCRIBE
+            </a>
+            
+            <p>
+                </p>
+        </div>
+    </section>
+
+    <section class="support-section">
+        <div class="support-card">
+            <h2 class="support-heading">Support Our Journey!</h2> 
+            <p>
+                If you enjoy our content and would like to support our adventures on "Serene Summer," consider leaving a small tip! Your generosity helps us keep exploring and sharing our stories from the beautiful South Pacific.
+            </p>
+            <div class="support-buttons">
+                <a href="https://paypal.me/SereneSummer" target="_blank" class="paypal-button">
+                    <i class="fab fa-paypal"></i> Support via PayPal
+                </a>
+                <a href="YOUR_STRIPE_DONATION_LINK_HERE" target="_blank" class="stripe-button">
+                    <i class="fab fa-stripe-s"></i> Support via Stripe
+                </a>
+            </div>
+            <p class="thank-you-note">
+                (Thank you for your incredible support!)
+            </p>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="etr-grid-card">
+            <h2 class="info-heading">Eat, Travel, Relax</h2>
+            <div class="etr-grid">
+                <div class="etr-box">
+                    <img src="https://i.imgur.com/S2m3JIf.jpg" alt="Delicious food">
+                    <div class="etr-box-content">
+                        <h3>EAT</h3>
+                        <p>Delicious meals from local markets to galley creations.</p>
+                    </div>
+                </div>
+                <div class="etr-box">
+                    <img src="https://i.imgur.com/DRNzpAk.jpg" alt="Beautiful travel destination">
+                    <div class="etr-box-content">
+                        <h3>TRAVEL</h3>
+                        <p>Navigating beautiful coastlines and discovering remote islands.</p>
+                    </div>
+                </div>
+                <div class="etr-box">
+                    <img src="https://i.imgur.com/Eq8Eat8.jpg" alt="Relaxing on the boat">
+                    <div class="etr-box-content">
+                        <h3>RELAX</h3>
+                        <p>Finding serenity on anchor and enjoying the ocean's calm.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="info-card">
+            <h2 class="info-heading">The Pacific Passage: May 2026</h2>
+            <div class="info-content">
+                <h3>Charting the Coconut Milk Run</h3>
+                <p>
+                    The countdown is on! In May next year, we will begin our epic journey across the Pacific Ocean—a rite of passage for any true blue-water cruiser. This voyage will see *Serene Summer* cover thousands of nautical miles, chasing the trade winds from the Americas to the enchanting South Pacific islands.
+                </p>
+                <p>
+                    Follow along as we track our progress, share our preparations, and navigate the challenges of the open ocean en route to paradise.
+                </p>
+                
+                <div class="passage-stats">
+                    <div class="stat-box departure stat-box-image">
+                        <div class="stat-box-content">
+                            <h4>MAY 2026</h4>
+                            <p>Planned Departure Date</p>
+                        </div>
+                    </div>
+                    <div class="stat-box miles stat-box-image">
+                        <div class="stat-box-content">
+                            <h4>4000+ NM</h4>
+                            <p>Miles to Polynesian Islands</p>
+                        </div>
+                    </div>
+                    <div class="stat-box countries stat-box-image">
+                        <div class="stat-box-content">
+                            <h4>5+</h4>
+                            <p>Countries to Visit</p>
+                        </div>
+                    </div>
+                </div>
+
+                
+
+<h3 style="margin-top: 3rem; margin-bottom: 1.5rem; text-align: center; color: #263238;">Live Yacht Tracker</h3>
+                <div class="predictwind-tracker-container">
+                    <iframe 
+                        src="https://forecast.predictwind.com/tracking/display/SV-SereneSummer/" 
+                        frameborder="0" 
+                        allowfullscreen
+                        style="border: 1px solid #e0e0e0; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"
+                        loading="lazy"
+                    ></iframe>
+                </div>
+                
+
+</div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="info-card">
+            <h2 class="info-heading">Meet Serene Summer</h2>
+            <div class="info-content">
+                <h3>Our Home on the Waves</h3>
+                <p>
+                    "Serene Summer" isn't just a yacht; she is a true bluewater cruiser and a comfortable home designed for extended voyages. She's a magnificent Tayana 55, known for her robust build and exceptional seaworthiness, capable of handling diverse conditions with grace.
+                </p>
+                <p>
+                    Equipped with all the modern conveniences—from a TV and coffee machine to an onboard bread maker—she truly combines the thrill of sailing with the comforts of home.
+                </p>
+                <a href="#">
+                    View More About Our Yacht <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:1em; height:1em; display:inline;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="info-card">
+            <h2 class="info-heading">Staying Connected</h2>
+            <div class="info-content">
+                <h3>Seamless Internet on the High Seas</h3>
+                <p>
+                    In the vastness of the ocean, reliable internet can transform the cruising experience. We've embraced Starlink, and it's been a game-changer for staying in touch with loved ones, streaming shows, and accessing crucial weather data in even the most remote anchorages.
+                </p>
+                <p>
+                    The benefits far outweigh the setup effort, offering us peace of mind and access to information wherever our voyages take us.
+                </p>
+                <a href="#">
+                    Learn More About Our Setup <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:1em; height:1em; display:inline;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="info-card">
+            <h2 class="info-heading">Our Nouméa Adventure</h2>
+            <div class="info-content">
+                <h3>Highlights from New Caledonia</h3>
+                <p>
+                    Our journey to Nouméa was a spectacular experience, filled with pristine islands and vibrant local culture. We explored the breathtaking Île des Pins, the "closest island to paradise," and the stunning lagoon of Île des Maîtres with its iconic overwater bungalows. 
+                </p>
+                <p>
+                    Back in the city, we immersed ourselves in the local culture at Nouméa's vibrant markets—a true feast for the senses that stocked our galley for delicious meals back on Serene Summer.
+                </p>
+                <a href="#">
+                    Read More About Nouméa <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:1em; height:1em; display:inline;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="info-section">
+        <div class="info-card">
+            <h2 class="info-heading">Magnetic Island Race Week</h2>
+            <div class="info-content">
+                <h3>Thrill of the Tropics: Racing in Paradise</h3>
+                <p>
+                    Magnetic Island Race Week is an annual highlight on the Australian sailing calendar, a fantastic blend of competitive racing and vibrant shoreside festivities in the stunning waters of North Queensland. We had an exhilarating time navigating the challenging courses, experiencing the adrenaline of close-quarters racing, and enjoying the camaraderie with fellow sailors.
+                </p>
+                <p>
+                    From the strategic starts to the exhilarating finishes against the backdrop of Magnetic Island's beautiful bays, it’s an event that truly captures the spirit of tropical yacht racing. Evenings were spent celebrating with live music and delicious food, making it an unforgettable experience both on and off the water.
+                </p>
+                <a href="#">
+                    Relive the Race Week Action <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:1em; height:1em; display:inline;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="info-card">
+            <h2 class="info-heading">Navigating Bureaucracy</h2>
+            <p>
+                Dealing with customs, immigration, and marine regulations is part of the cruising life. We break down the complex paperwork and provide straightforward guides to clear in and out of the most popular South Pacific destinations seamlessly.
+            </p>
+            <div class="bureaucracy-grid">
+                <div class="grid-item">
+                    <i class="fas fa-passport"></i>
+                    <h4>Immigration Check-In</h4>
+                    <p>Essential documents, visa requirements, and the step-by-step process for a smooth arrival in a new country.</p>
+                    <a href="#">View Guide</a>
+                </div>
+                <div class="grid-item">
+                    <i class="fas fa-file-contract"></i>
+                    <h4>Customs & Clearance</h4>
+                    <p>Understand declarations for provisions and spares, and the proper procedure for clearing your vessel out for departure.</p>
+                    <a href="#">View Guide</a>
+                </div>
+                <div class="grid-item">
+                    <i class="fas fa-ship"></i>
+                    <h4>Marine Permits</h4>
+                    <p>Guidance on obtaining cruising permits and paying anchorage fees for protected areas and remote islands.</p>
+                    <a href="#">View Guide</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div id="join-us" class="info-card">
+            <h2 class="info-heading">Join Our Journey!</h2>
+             <p>
+                Subscribe to get the latest updates from the high seas directly to your inbox.
+            </p>
+            <div class="cta-form">
+                <input type="email" placeholder="Your Email Address">
+                <button type="submit">
+                    Subscribe
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div id="contact-us" class="info-card">
+            <h2 class="info-heading">Get In Touch</h2>
+            <p>
+                Have a question, a comment, or just want to say hello? Fill out the form below and we'll get back to you as soon as possible!
+            </p>
+            <form action="https://formspree.io/f/manjpkkj" method="POST" class="contact-form-group">
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject">
+                </div>
+                <div>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit">
+                    Send Message
+                </button>
+            </form>
+            <p class="contact-disclaimer">
+                This form is powered by <a href="https://formspree.io/" target="_blank">Formspree.io</a>.
+            </p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="copyright-section">
+                <p>&copy; 2025 My Sailing Adventures. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a> <a href="#">Terms of Service</a> </div>
+            </div>
+
+            <div class="about-skippers-section">
+                <h4>About the Skipper</h4>
+                <img src="https://i.imgur.com/2PdQzAF.jpeg" alt="The skipper of Serene Summer">
+                <p>
+                    **Hello, fellow dreamers!** As the captain of *Serene Summer*, a robust Tayana 55, I've spent years transforming her into the ultimate bluewater home. My voyage is fueled by the simple but powerful dream of exploring the vibrant, remote islands of the South Pacific. This blog is my personal logbook—a space to share the honest, exhilarating challenges of offshore sailing, the sheer beauty of life at anchor, and the detailed practicalities (yes, even the bureaucracy!) of living this incredible lifestyle. Thank you for sailing along with me!
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
