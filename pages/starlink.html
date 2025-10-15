@@ -59,7 +59,7 @@
             padding: 1.5rem 0; 
             border-bottom: 1px solid rgba(0, 0, 0, 0.1); 
             
-            /* --- Sticky Header Enhancements --- */
+            /* --- NEW: Sticky Header Enhancements --- */
             position: sticky; 
             top: 0; 
             z-index: 1000; 
@@ -100,31 +100,12 @@
             display: flex;
             gap: 2.5rem;
             font-size: 0.95rem;
-            align-items: center; /* Ensures LI items are centered in the flex container */
-            height: 100%; 
         }
         
-        /* --- Dropdown Menu System CSS --- */
+        /* --- NEW: Dropdown Menu System CSS --- */
         .main-nav li {
             position: relative;
             list-style: none; /* Remove bullet points */
-            height: 100%; 
-            display: flex;
-            align-items: center; /* Vertically center the anchor inside the li */
-        }
-
-        /* CORE FIX: Set anchors to display block/flex for consistent padding and vertical centering */
-        .main-nav ul a {
-            display: inline-block;
-            padding: 0.5rem 0; /* Consistent padding */
-            line-height: 1.2; 
-        }
-        
-        /* Apply padding to the main dropdown link to create a larger hover area */
-        .dropdown > a {
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-            display: block; 
         }
 
         /* Hide the dropdown by default */
@@ -136,13 +117,7 @@
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 1001; /* Above sticky header */
             padding: 0;
-            
-            /* --- FINAL ALIGNMENT FIX --- */
-            top: 100%; /* Position exactly below the <li> parent */
-            margin-top: 0; /* Remove any default list margin */
-            
-            left: 50%; /* Start dropdown at 50% of parent width */
-            transform: translateX(-50%); /* Shift back by half its own width for perfect center alignment */
+            margin-top: 1.5rem; /* Space below the main link */
             border-top: 3px solid #007bff; /* Accent color */
         }
         
@@ -156,7 +131,6 @@
             text-transform: none; /* Sub-links should be title case, not uppercase */
             font-weight: 400;
             border-bottom: 1px solid #f0f0f0;
-            line-height: normal; /* Reset line-height for sub-links */
         }
 
         .dropdown-content a:hover {
@@ -176,17 +150,17 @@
             text-transform: uppercase;
             transition: color 0.3s ease;
             letter-spacing: 0.03em;
-            text-decoration: none; /* Removed underlining from all standard links */
         }
 
         .main-nav a:hover {
-            color: #007bff; /* Changed hover color for cleaner look */
+            color: #666666; 
         }
         
-        /* --- Active Navigation Link Styling (No Underline) --- */
+        /* --- NEW: Active Navigation Link Styling --- */
         .main-nav a.active {
             color: #007bff; 
             font-weight: 700;
+            border-bottom: 2px solid #007bff;
             padding-bottom: 0.25rem;
         }
 
@@ -197,9 +171,9 @@
             padding-bottom: 56.25%; 
             background-color: #000; 
             border-radius: 0;
+            overflow: hidden;
             box-shadow: none;
             margin-bottom: 4rem;
-            overflow: hidden; 
         }
 
         .hero-video-background { 
@@ -518,50 +492,7 @@
             width: 100%;
             box-sizing: border-box;
         }
-
-        /* --- NEW: Meet The Crew Styling --- */
-        #meet-the-crew .crew-card {
-            background-color: #ffffff;
-            color: #263238;
-            /* Changed padding to 5rem 4rem to match info-card */
-            padding: 5rem 4rem; 
-            border-radius: 0;
-            box-shadow: 0 8px 15px -5px rgba(0, 0, 0, 0.2);
-            /* NOW FULL WIDTH of container */
-            max-width: 1280px; 
-            margin: 0 auto;
-            text-align: center;
-            border: 1px solid #e0e0e0; 
-            
-            /* Apply container padding for consistency across full width sections */
-            padding-left: 2rem;
-            padding-right: 2rem; 
-            box-sizing: border-box; 
-        }
-
-        #meet-the-crew .crew-card img {
-            /* Doubled size from 160px to 320px */
-            width: 320px; 
-            height: 320px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 1.5rem;
-            border: 5px solid #007bff; /* Primary color accent ring */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        #meet-the-crew .crew-card h2 {
-            margin-bottom: 1rem;
-        }
-        #meet-the-crew .crew-card p {
-            font-size: 1.15rem;
-            line-height: 1.8;
-            color: #4a4a4a;
-            /* Constrain text width for readability even though card is full width */
-            max-width: 800px; 
-            margin: 0 auto;
-        }
-        /* --- End Meet The Crew Styling --- */
-        
+        /* ... (rest of light card content styles unchanged) ... */
 
         /* --- ETR Section (Uses Dark Card Style, different from standard info-card) --- */
         .etr-grid-card {
@@ -903,6 +834,34 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
+        .about-skippers-section {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Set a defined size/padding for content area */
+            padding: 1.5rem; 
+            background-color: #1a1a1a; 
+            border-radius: 4px;
+        }
+        
+        .about-skippers-section img {
+            width: 80px; 
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid #007bff; 
+        }
+        
+        .about-skippers-section p {
+            /* Fluff text styling */
+            color: #e0e0e0;
+            line-height: 1.6;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        
         /* --- NEW: Footer Link Styling --- */
         .footer-links a {
             color: #ffffff; 
@@ -952,7 +911,7 @@
                     <li><a href="#support-us">Support</a></li>
                     
                     <li class="dropdown">
-                        <a href="pages/meet-serene-summer.html">Guides & Logs</a>
+                        <a href="yacht_guide.html">Guides & Logs</a>
                         <div class="dropdown-content">
                             <a href="pages/meet-serene-summer.html">Meet Serene Summer</a>
                             <a href="pages/pacific-passage.html">Pacific Passage Log</a>
@@ -1032,15 +991,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <section id="meet-the-crew" class="info-section">
-        <div class="crew-card">
-            <img src="https://i.imgur.com/2PdQzAF.jpeg" alt="The captain of Serene Summer">
-            <h2 class="info-heading">About The Captain</h2> <p>
-                **Hello, fellow dreamers!** As the captain of *Serene Summer*, a robust Tayana 55, I've spent years transforming her into the ultimate bluewater home. My voyage is fueled by the simple but powerful dream of exploring the vibrant, remote islands of the South Pacific. This blog is my personal logbook—a space to share the honest, exhilarating challenges of offshore sailing, the sheer beauty of life at anchor, and the detailed practicalities (yes, even the bureaucracy!) of living this incredible lifestyle. Thank you for sailing along with me!
-            </p>
         </div>
     </section>
 
@@ -1250,7 +1200,15 @@
     <footer class="footer">
         <div class="container" style="display: flex; flex-direction: column; gap: 2rem;"> 
             
-            <div class="copyright-section" style="order: 3; text-align: center; padding-top: 1.5rem;">
+            <div class="about-skippers-section" style="order: 2; max-width: 600px; margin: 0 auto; padding: 2rem;">
+                <h4>About the Skipper</h4>
+                <img src="https://i.imgur.com/2PdQzAF.jpeg" alt="The skipper of Serene Summer">
+                <p>
+                    **Hello, fellow dreamers!** As the captain of *Serene Summer*, a robust Tayana 55, I've spent years transforming her into the ultimate bluewater home. My voyage is fueled by the simple but powerful dream of exploring the vibrant, remote islands of the South Pacific. This blog is my personal logbook—a space to share the honest, exhilarating challenges of offshore sailing, the sheer beauty of life at anchor, and the detailed practicalities (yes, even the bureaucracy!) of living this incredible lifestyle. Thank you for sailing along with me!
+                </p>
+            </div>
+            
+            <div class="copyright-section" style="order: 3; text-align: center; border-top: 1px solid #333; padding-top: 1.5rem;">
                 <div class="footer-links" style="margin-bottom: 0.5rem;">
                     <a href="#">Privacy Policy</a> <a href="#">Terms of Service</a> 
                 </div>
