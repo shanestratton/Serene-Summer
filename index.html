@@ -31,6 +31,11 @@
             -moz-osx-font-smoothing: grayscale;
             line-height: 1.6; /* Increased line-height for readability */
         }
+        
+        /* */
+        body.nav-open {
+            overflow: hidden;
+        }
 
         /* Headings Font - Applied for a consistent, modern feel */
         h1, h2, h3, h4 {
@@ -582,7 +587,7 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .etr-grid-card:hover {
-             transform: scale(1.01);
+            transform: scale(1.01);
             box-shadow: 0 15px 25px -8px rgba(0, 0, 0, 0.6), 0 10px 15px -8px rgba(0, 0, 0, 0.4);
         }
         .etr-grid-card .info-heading {
@@ -921,6 +926,161 @@
             margin-left: 0.5rem;
             margin-right: 0.5rem;
         }
+
+
+        /* ==============================================
+        ==============================================
+        */
+
+        /* --- 1. Hamburger Menu --- */
+        .mobile-nav-toggle {
+            display: none; /* Hidden on desktop */
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1002; /* Above mobile nav */
+            padding: 0.5rem;
+        }
+        .mobile-nav-toggle i {
+            font-size: 1.5rem;
+            color: #263238;
+        }
+        .mobile-nav-toggle .icon-close { display: none; }
+        
+        /* When nav is open, show 'X' and hide 'bars' */
+        body.nav-open .mobile-nav-toggle .icon-close { display: block; }
+        body.nav-open .mobile-nav-toggle .icon-open { display: none; }
+
+
+        /* Breakpoint at 768px (tablets and phones) */
+        @media (max-width: 768px) {
+            
+            /* --- Header & Nav --- */
+            .mobile-nav-toggle {
+                display: block; /* Show hamburger */
+            }
+            .header .container {
+                /* This keeps .social-icons on left, .mobile-nav-toggle on right */
+                justify-content: space-between; 
+            }
+            .main-nav {
+                display: none; /* Hide desktop nav */
+            }
+
+            /* --- Mobile Nav Overlay --- */
+            body.nav-open .main-nav {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: fixed;
+                inset: 0; /* Full screen */
+                background-color: #ffffff;
+                z-index: 1001; /* Below toggle, above content */
+                padding-top: 5rem;
+                animation: fadeIn 0.3s ease;
+            }
+            body.nav-open .main-nav ul {
+                flex-direction: column;
+                gap: 2rem;
+                height: auto;
+                text-align: center;
+            }
+            body.nav-open .main-nav li {
+                height: auto;
+            }
+            body.nav-open .main-nav ul a {
+                font-size: 1.5rem; /* Big, tappable links */
+            }
+            
+            /* --- Mobile Dropdown (Stacked) --- */
+            body.nav-open .dropdown-content {
+                position: static; /* No longer absolute */
+                display: block; /* Always show sub-items */
+                box-shadow: none;
+                border: none;
+                background-color: transparent;
+                min-width: 0;
+                transform: none;
+                left: auto;
+                padding-top: 0.5rem;
+            }
+            body.nav-open .dropdown-content a {
+                color: #4a4a4a;
+                font-size: 1.1rem; /* Smaller sub-links */
+                font-weight: 300;
+                padding: 0.5rem 1rem;
+                border: none;
+            }
+            body.nav-open .dropdown-content a:hover {
+                background-color: transparent;
+                color: #007bff;
+            }
+
+            /* --- 2. Typography & Padding --- */
+            
+            /* Reduce heading sizes */
+            .info-heading,
+            .support-heading,
+            #meet-the-crew .crew-card h2 {
+                font-size: 2rem; /* Was 3.5rem */
+                letter-spacing: 0.1em;
+                margin-bottom: 2rem;
+            }
+            
+            /* Reduce padding on large cards */
+            .support-card,
+            .info-card,
+            #meet-the-crew .crew-card,
+            .etr-grid-card {
+                padding: 3rem 1.5rem; /* Was 5rem 4rem */
+            }
+            
+            /* --- 3. Specific Element Fixes --- */
+            
+            /* Hero button - position it better */
+            .hero-subscribe-button {
+                font-size: 1rem;
+                padding: 0.75rem 1.5rem;
+                align-self: center; /* Center it */
+                margin: 0;
+                margin-top: 2rem;
+            }
+            
+            /* Crew image - ensure it doesn't overflow */
+            #meet-the-crew .crew-card img {
+                width: 250px; /* Was 320px */
+                height: 250px;
+                max-width: 100%;
+            }
+            
+            /* Passage stats - make text smaller */
+            .passage-stats .stat-box h4 {
+                font-size: 1.8rem; /* Was 2.2rem */
+            }
+            .passage-stats .stat-box {
+                min-height: 150px; /* Was 180px */
+                width: 100%; /* Force full width */
+                flex-basis: auto;
+            }
+            
+            /* Support buttons - make them full width */
+            .support-buttons a {
+                width: 100%;
+                text-align: center;
+                padding: 1.25rem 2rem; /* Was 1.5rem 4rem */
+            }
+
+            /* Footer - stack links */
+            .footer-links {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .footer-links a + a::before {
+                display: none; /* Remove the "|" separator */
+            }
+        }
         
     </style>
 </head>
@@ -967,6 +1127,12 @@
                     <li><a href="#contact-us">Contact</a></li>
                 </ul>
             </nav>
+
+            <button class="mobile-nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="fas fa-bars icon-open"></i>
+                <i class="fas fa-times icon-close"></i>
+            </button>
+
         </div>
     </header>
 
@@ -1037,7 +1203,7 @@
     
     <section id="meet-the-crew" class="info-section">
         <div class="crew-card">
-            <img src="https://i.imgur.com/2PdQzAF.jpeg" alt="The captain of Serene Summer">
+            <img src="httpss://i.imgur.com/2PdQzAF.jpeg" alt="The captain of Serene Summer">
             <h2 class="info-heading">About The Captain</h2> <p>
                 **Hello, fellow dreamers!** As the captain of *Serene Summer*, a robust Tayana 55, I've spent years transforming her into the ultimate bluewater home. My voyage is fueled by the simple but powerful dream of exploring the vibrant, remote islands of the South Pacific. This blog is my personal logbook—a space to share the honest, exhilarating challenges of offshore sailing, the sheer beauty of life at anchor, and the detailed practicalities (yes, even the bureaucracy!) of living this incredible lifestyle. Thank you for sailing along with me!
             </p>
@@ -1090,7 +1256,6 @@
                     ></iframe>
                 </div>
                 
-
 </div>
         </div>
     </section>
@@ -1200,7 +1365,7 @@
         <div id="join-us" class="support-card">
             <h2 class="support-heading">Join Our Journey!</h2>
              <p>
-                Subscribe to get the latest updates from the high seas directly to your inbox.
+                 Subscribe to get the latest updates from the high seas directly to your inbox.
             </p>
             <div class="cta-form">
                 <input type="email" placeholder="Your Email Address">
@@ -1267,6 +1432,16 @@
             } else {
                 document.body.classList.remove('scrolled');
             }
+        });
+
+        // --- Mobile Nav Toggle ---
+        const navToggle = document.querySelector('.mobile-nav-toggle');
+        const bodyEl = document.body;
+
+        navToggle.addEventListener('click', () => {
+            bodyEl.classList.toggle('nav-open');
+            const isExpanded = bodyEl.classList.contains('nav-open');
+            navToggle.setAttribute('aria-expanded', isExpanded);
         });
     </script>
 </body>
