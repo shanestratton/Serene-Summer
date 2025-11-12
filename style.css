@@ -218,11 +218,13 @@ body.scrolled .header {
         width: 177.77vh; 
     }
 }
+
+/* --- THIS IS THE FIX (Opacity set to 0) --- */
 .hero-overlay {
     position: absolute;
     inset: 0;
     background-color: #000000;
-    opacity: 0.5; /* Darkened overlay for readability */
+    opacity: 0; /* User request: Removed dark tint */
 }
 .hero-content {
     position: relative; 
@@ -239,14 +241,14 @@ body.scrolled .header {
     font-weight: 900;
     letter-spacing: 0.1em;
     margin-bottom: 0.5rem;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.7); /* Text shadow remains for readability */
 }
 .hero-subtitle {
     font-size: 1.25rem;
     font-weight: 300;
     margin-top: 0;
     margin-bottom: 2rem;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.7); /* Text shadow remains for readability */
 }
 .hero-subscribe-button { 
     display: inline-flex;
@@ -272,7 +274,6 @@ body.scrolled .header {
 }
 
 /* --- Content Card System --- */
-/* This is the new base style for all content blocks */
 .content-card {
     border-radius: 12px; /* Rounded corners */
     box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
@@ -284,15 +285,12 @@ body.scrolled .header {
     z-index: 2; /* Sits on top of background */
     animation: fadeIn 0.8s ease-in-out;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    
-    /* THE OVERLAP EFFECT */
     margin-top: -80px; /* Pulls the card up */
 }
 .content-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.3);
 }
-/* The section wrapper provides the background and spacing */
 .info-section, .support-section {
     padding-top: 120px; /* Creates space for the overlapping card */
     padding-bottom: 4rem;
@@ -300,7 +298,6 @@ body.scrolled .header {
     width: 100%; 
     box-sizing: border-box; 
 }
-/* First card needs more top padding */
 .support-section {
     padding-top: 120px;
     background-color: #f8f8f8; /* Base background */
@@ -312,8 +309,10 @@ body.scrolled .header {
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+/* --- THIS IS THE FIX (Heading Font Size) --- */
 h2.support-heading {
-    font-size: 3.5rem;
+    font-size: 3rem; /* Was 3.5rem */
     font-weight: 700;
     letter-spacing: 0.15em;
     margin-bottom: 3rem;
@@ -462,8 +461,10 @@ h2.support-heading {
     align-items: center;
     justify-content: center;
 }
+
+/* --- THIS IS THE FIX (Heading Font Size) --- */
 .info-card .info-heading {
-    font-size: 3.5rem;
+    font-size: 3rem; /* Was 3.5rem */
     font-weight: 700;
     letter-spacing: 0.15em;
     margin-bottom: 3rem;
@@ -915,13 +916,13 @@ body.nav-open .mobile-nav-toggle i {
         font-size: 1.1rem;
     }
     
-    /* Reduce heading sizes */
+    /* --- THIS IS THE FIX (Mobile Headings) --- */
     .info-heading,
     .support-heading,
     #meet-the-crew .crew-card h2 {
-        font-size: 2rem;
-        letter-spacing: 0.1em;
-        margin-bottom: 2rem;
+        font-size: 1.8rem; /* Was 2rem */
+        letter-spacing: 0.05em; /* Reduced spacing */
+        margin-bottom: 1.5rem; /* Reduced margin */
     }
     
     /* Reduce padding on large cards */
