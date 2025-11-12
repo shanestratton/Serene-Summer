@@ -123,6 +123,7 @@
             display: inline-block;
             padding: 0.5rem 0; /* Consistent padding */
             line-height: 1.2; 
+            text-transform: uppercase; 
         }
         
         /* Apply padding to the main dropdown link to create a larger hover area */
@@ -178,7 +179,6 @@
         .main-nav a {
             color: #1a1a1a; 
             font-weight: 400;
-            text-transform: uppercase;
             transition: color 0.3s ease;
             letter-spacing: 0.03em;
             text-decoration: none; /* Removed underlining from all standard links */
@@ -631,15 +631,15 @@
             background-position: center;
         }
 
-        /* Individual Image URLs (UPDATED) */
+        /* --- IMAGE PATHS UPDATED --- */
         .stat-box.departure {
-            background-image: url('https://i.imgur.com/xQCPowK.png'); 
+            background-image: url('images/planned departure date.jpg'); 
         }
         .stat-box.miles {
-            background-image: url('https://i.imgur.com/KjWOtOE.png'); 
+            background-image: url('images/miles to polynesian islands.jpg'); 
         }
         .stat-box.countries {
-            background-image: url('https://i.imgur.com/yCbNQoM.png'); 
+            background-image: url('images/countries to visit.jpg'); 
         }
 
         /* Overlay for Readability - OPACITY DECREASED TO 35% */
@@ -1005,13 +1005,18 @@
                 left: auto;
                 padding-top: 0.5rem;
             }
+            
+            /* --- THIS IS THE FIX --- */
             body.nav-open .dropdown-content a {
-                color: #4a4a4a;
+                color: #333333; /* Darker color for better readability */
                 font-size: 1.1rem; /* Smaller sub-links */
-                font-weight: 300;
+                font-weight: 400; /* Was 300 (light), now 400 (regular) */
                 padding: 0.5rem 1rem;
                 border: none;
+                text-align: center; 
+                text-transform: none; /* <-- THIS IS THE FINAL FIX */
             }
+            
             body.nav-open .dropdown-content a:hover {
                 background-color: transparent;
                 color: #007bff;
@@ -1177,21 +1182,21 @@
             <h2 class="info-heading">Eat, Travel, Relax</h2>
             <div class="etr-grid">
                 <div class="etr-box">
-                    <img src="https://i.imgur.com/S2m3JIf.jpg" alt="Delicious food">
+                    <img src="images/eat.jpg" alt="Delicious food">
                     <div class="etr-box-content">
                         <h3>EAT</h3>
                         <p>Delicious meals from local markets to galley creations.</p>
                     </div>
                 </div>
                 <div class="etr-box">
-                    <img src="https://i.imgur.com/DRNzpAk.jpg" alt="Beautiful travel destination">
+                    <img src="images/travel.jpg" alt="Beautiful travel destination">
                     <div class="etr-box-content">
                         <h3>TRAVEL</h3>
                         <p>Navigating beautiful coastlines and discovering remote islands.</p>
                     </div>
                 </div>
                 <div class="etr-box">
-                    <img src="https://i.imgur.com/Eq8Eat8.jpg" alt="Relaxing on the boat">
+                    <img src="images/relax.jpg" alt="Relaxing on the boat">
                     <div class="etr-box-content">
                         <h3>RELAX</h3>
                         <p>Finding serenity on anchor and enjoying the ocean's calm.</p>
@@ -1203,7 +1208,7 @@
     
     <section id="meet-the-crew" class="info-section">
         <div class="crew-card">
-            <img src="httpss://i.imgur.com/2PdQzAF.jpeg" alt="The captain of Serene Summer">
+            <img src="images/captain.jpg" alt="The captain of Serene Summer">
             <h2 class="info-heading">About The Captain</h2> <p>
                 **Hello, fellow dreamers!** As the captain of *Serene Summer*, a robust Tayana 55, I've spent years transforming her into the ultimate bluewater home. My voyage is fueled by the simple but powerful dream of exploring the vibrant, remote islands of the South Pacific. This blog is my personal logbook—a space to share the honest, exhilarating challenges of offshore sailing, the sheer beauty of life at anchor, and the detailed practicalities (yes, even the bureaucracy!) of living this incredible lifestyle. Thank you for sailing along with me!
             </p>
@@ -1216,7 +1221,7 @@
             <div class="info-content">
                 <h3>Charting the Coconut Milk Run</h3>
                 <p>
-                    The countdown is on! In May next year, we will begin our epic journey across the Pacific Ocean—a rite of passage for any true blue-water cruiser. This voyage will see *Serene Summer* cover thousands of nautical miles, chasing the trade winds from the Americas to the enchanting South Pacific islands.
+                    The countdown is on! In May next year, we will begin our epic journey across the Pacific Ocean—a rite of passage for any true blue-water cruiser. This voyage will see *Serene Summer* cover thousands of nautical miles,. chasing the trade winds from the Americas to the enchanting South Pacific islands.
                 </p>
                 <p>
                     Follow along as we track our progress, share our preparations, and navigate the challenges of the open ocean en route to paradise.
